@@ -1,20 +1,25 @@
-]<ion-header>
+<ion-header *ngIf="cardDetailed?.cardId">
   <ion-toolbar>
-    <ion-title>
-      Detail Page
-    </ion-title>
+    <!-- <ion-back-button (click)="navigateBackToCardDeckGroup()" size="medium" expand="full"></ion-back-button> -->
+    <ion-back-button slot="start"
+        href="`/tabs/cardDeck/cardListing/${cardDeckGroup}/${cardDeck}`" routerDirection="backward">
+    </ion-back-button>
+    <ion-title>{{ cardDetailed.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-card class="welcome-card">
-      <ion-img src="/assets/shapes.svg"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Ionic</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>I am Card Detail Page</p>
-      </ion-card-content>
-    </ion-card>
+<ion-content padding>
+  <ion-card *ngIf="cardDetailed && cardDetailed.cardId">
+    <img [src]="cardDetailed.img" (error)="updateImage($event)"/>
+    <ion-card-header text-wrap>
+      <ion-card-title>
+        {{ cardDetailed.cardSet }}     
+      </ion-card-title>
+      <p [innerHTML]="cardDetailed.text"></p>
+    </ion-card-header>
+    <ion-card-content>  
+        <p><b>Class: </b>{{ cardDetailed.playerClass }}</p>
+        <p><b>Type: </b>{{ cardDetailed.type }}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

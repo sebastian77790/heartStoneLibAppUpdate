@@ -1,51 +1,47 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
-import { TabsPage } from './tabs.page';
+import { TabsPage } from "./tabs.page";
+//import { CardDeckPage } from "../card/card-deck.page";
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: "tabs",
     component: TabsPage,
     children: [
+      /*{
+        path: "card",
+        children: [
+          { path: "", loadChildren: "../card/card.module#CardPageModule" }
+        ]
+      },*/
       {
-        path: 'card',
+        path: "cardDeck",
         children: [
           {
-            path: '',
-            loadChildren: '../card/card.module#CardPageModule'
+            path: "",
+            loadChildren:
+              "../card/card-deck/card-deck.module#CardDeckPageModule"
           }
         ]
       },
       {
-        path: 'tab2',
+        path: "tab3",
         children: [
-          {
-            path: '',
-            loadChildren: '../tab2/tab2.module#Tab2PageModule'
-          }
+          { path: "", loadChildren: "../tab3/tab3.module#Tab3PageModule" }
         ]
       },
       {
-        path: 'tab3',
-        children: [
-          {
-            path: '',
-            loadChildren: '../tab3/tab3.module#Tab3PageModule'
-          }
-        ]
-      },
-      {
-        path: '',
-        redirectTo: '/tabs/card',
-        pathMatch: 'full'
+        path: "",
+        redirectTo: "/tabs/cardDeck",
+        pathMatch: "full"
       }
     ]
   },
   {
-    path: '',
-    redirectTo: '/tabs/card',
-    pathMatch: 'full'
+    path: "",
+    redirectTo: "/tabs/cardDeck",
+    pathMatch: "full"
   }
 ];
 

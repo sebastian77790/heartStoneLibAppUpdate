@@ -1,5 +1,7 @@
 {
   "name": "heartstoneLib-update",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

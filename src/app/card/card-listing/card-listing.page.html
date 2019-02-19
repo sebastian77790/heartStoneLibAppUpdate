@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ cardDeckGroup }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <h1>{{ cardDeck }}</h1>
+  <ion-list *ngIf="cards.length > 0">
+    <ion-card *ngFor="let card of cards">
+        <!-- <img [src]="'assets/images/' + cardDeck + '.png'" /> -->
+      <ion-card-header text-wrap>
+        <ion-card-subtitle>{{ card.cardSet }}</ion-card-subtitle>
+        <ion-card-title>{{ card.name }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div [innerHTML]="card.text"></div>
+        <ion-button (click)="navigateToDetail(cardDeckGroup, cardDeck, card.cardId, card.imgGold)" size="medium" expand="full">Detail</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

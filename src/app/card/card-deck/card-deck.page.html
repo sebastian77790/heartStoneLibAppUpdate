@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cards Deck</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- <ion-button href="/tabs/cardDeck/cardListing">listing</ion-button>
+  <ion-button (click)="go()">GO!</ion-button>
+  <ion-button (click)="goActivated()">GO Activated!</ion-button>
+  <ion-button (click)="goCtrl()">GO Controller!</ion-button> -->
+  <app-card-list
+    *ngFor="let cardDeck of cardDecks"
+    [items]="cardDeck.types"
+    [listName]="cardDeck.name"
+    [navigateTo]="generateUrl"
+  ></app-card-list>
+</ion-content>

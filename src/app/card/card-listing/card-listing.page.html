@@ -8,13 +8,13 @@
 </ion-header>
 
 <ion-content padding>
+  <h1 style="text-align:center;">{{ cardDeck }}</h1>
+  <app-search (searchCompleted)="hydrateCards($event)" [items]="copyOfCards" ></app-search>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <h1>{{ cardDeck }}</h1>
   <ion-list *ngIf="cards.length > 0">
     <ion-card *ngFor="let card of cards">
-        <!-- <img [src]="'assets/images/' + cardDeck + '.png'" /> -->
       <ion-card-header text-wrap>
         <ion-card-subtitle>{{ card.cardSet }}</ion-card-subtitle>
         <ion-card-title>{{ card.name }}</ion-card-title>

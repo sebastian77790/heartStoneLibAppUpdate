@@ -18,6 +18,7 @@ export class CardListingPage {
   cardDeck: string;
 
   cards: Card[] = [];
+  copyOfCards: Card[] = [];
 
   constructor(
     private router: ActivatedRoute,
@@ -40,6 +41,8 @@ export class CardListingPage {
             card.text = this.cardService.replaceCardText(card.text);
             return card;
           });
+
+          this.copyOfCards = Array.from(this.cards);
           this.loadingService.dismissLoading();
         },
         () => {
@@ -61,6 +64,10 @@ export class CardListingPage {
   doRefresh(event){
     this.getCards();
     event.target.complete();
+  }
+
+  hydrateCards(cards: Card[]){
+    this.cards = cards;
   }
 
   navigateToDetail(

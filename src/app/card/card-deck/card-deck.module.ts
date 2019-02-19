@@ -35,7 +35,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    CardListComponentModule
+    CardListComponentModule 
   ],
   providers: [
     LoaderService,

@@ -9,7 +9,12 @@
 
 <ion-content padding>
   <h1 style="text-align:center;">{{ cardDeck }}</h1>
-  <app-search (searchCompleted)="hydrateCards($event)" [items]="copyOfCards" ></app-search>
+  <app-search (searchCompleted)="hydrateCards($event)" 
+              (searchStarted)="handleSearch()"
+              [items]="copyOfCards" 
+              [filteredProperty]="'name'"></app-search>
+  <ion-spinner text-center *ngIf="isLoading"></ion-spinner>
+
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>

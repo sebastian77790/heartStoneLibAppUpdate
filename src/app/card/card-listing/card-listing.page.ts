@@ -62,7 +62,7 @@ export class CardListingPage {
 
     //this.location.replaceState("/cardlist");
   }
-
+ 
   doRefresh(event){
     this.getCards();
     event.target.complete();

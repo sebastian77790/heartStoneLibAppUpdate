@@ -32,13 +32,13 @@ export class CardDetailPage {
     private alertService: AlertService
   ) {}
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     //this.cardId = this.router.snapshot.paramMap.get("cardId");
 
     this.cardDeckGroup = this.router.snapshot.paramMap.get("cardDeckGroup");
     this.cardDeck = this.router.snapshot.paramMap.get("cardDeck");
     
-    this.loadingService.presentLoading();
+    await this.loadingService.presentLoading();
 
     this.router.paramMap.subscribe((params: ParamMap) => {
       this.cardId = params.get("cardId");

@@ -14,4 +14,5 @@ export interface Card {
   playerClass: string;
   text: string;
   type: string;
+  favorite: boolean;
 }

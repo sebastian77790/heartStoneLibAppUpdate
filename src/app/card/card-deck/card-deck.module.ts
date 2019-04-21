@@ -12,6 +12,7 @@ import { CardListComponentModule } from "../components/card-list.module";
 import { LoaderService } from "../../shared/service/loader.service";
 import { ToastService } from "../../shared/service/toast.service";
 import { AlertService } from "../../shared/service/alert.service";
+import { FavoriteCardStore } from '../shared/card-favorite.store';
 
 const routes: Routes = [
   {
@@ -40,7 +41,8 @@ const routes: Routes = [
   providers: [
     LoaderService,
     ToastService,
-    AlertService
+    AlertService,
+    FavoriteCardStore
   ],
   declarations: [CardDeckPage],
   //declarations: [CardDeckPage, CardListingPage],

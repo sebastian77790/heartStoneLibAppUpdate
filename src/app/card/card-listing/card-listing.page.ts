@@ -4,9 +4,12 @@ import { ActivatedRoute } from "@angular/router";
 import { CardService } from "../shared/card.service";
 import { LoaderService } from "../../shared/service/loader.service";
 import { ToastService } from "../../shared/service/toast.service";
+import { Storage } from "@ionic/storage";
+import { FavoriteCardStore } from '../shared/card-favorite.store';
 
 import { Card } from "../shared/card.model";
 import { NavController } from "@ionic/angular";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-card-listing",
@@ -22,17 +25,31 @@ export class CardListingPage {
 
   isLoading: boolean = false;
 
+  favoriteCards: any = {};
+  favoriteCardSub: Subscription;
+
   constructor(
     private router: ActivatedRoute,
     private cardService: CardService,
     private navCtrl: NavController,
     private location: Location,
     private loadingService: LoaderService,
-    private toaster: ToastService
-  ) {}
+    private toaster: ToastService,
+    private storage: Storage,
+    private favoriteCardStore: FavoriteCardStore
+  ) {
 
-  private getCards() {
-    this.loadingService.presentLoading();
+    this.favoriteCardSub = this.favoriteCardStore.favoriteCards.subscribe((favoriteCards: any) => {
+      this.favoriteCards = favoriteCards || {};
+    })
+
+    /*this.storage.get('favoriteCards').then((favoriteCards) => {
+      this.favoriteCards = favoriteCards || {};
+    })*/
+  }
+
+  private async getCards() {
+    await this.loadingService.presentLoading();
 
     this.cardService
       .getCardsByDeck(this.cardDeckGroup, this.cardDeck)
@@ -41,6 +58,7 @@ export class CardListingPage {
           //this.cards = cards;
           this.cards = cards.map((card: Card) => {
             card.text = this.cardService.replaceCardText(card.text);
+            card.favorite = this.isCardFavorite(card.cardId);
             return card;
           });
 
@@ -52,6 +70,18 @@ export class CardListingPage {
           this.toaster.presentErrorToast("Cards could not be loaded");
         }
       );
+  }
+
+  private isCardFavorite(cardId: string):boolean{
+    const card = this.favoriteCards[cardId];
+
+    return card ? true : false;
+  }
+
+  ionViewDidLeave(){
+    if (this.favoriteCardSub && !this.favoriteCardSub.closed){
+      this.favoriteCardSub.unsubscribe();
+    }
   }
 
   ionViewWillEnter() {
@@ -89,4 +119,21 @@ export class CardListingPage {
       { cardId: cardId, cardImg: cardImg }
     ]);
   }
+
+  favoriteCard(card: Card){
+    this.favoriteCardStore.toggleCard(card);
+  }
+
+  /*favoriteCard(card: Card){
+    if(card.favorite){
+      card.favorite = false;
+      delete this.favoriteCards[card.cardId];
+    } else{
+      card.favorite = true;
+      this.favoriteCards[card.cardId] = card;
+    }
+
+    this.storage.set('favoriteCards', this.favoriteCards).then(() => {});
+  }*/
+
 }

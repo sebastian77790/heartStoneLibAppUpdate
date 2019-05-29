@@ -37,6 +37,7 @@ commands:
 
 npm install -g ionic cordova
 npm install -g @angular/cli 
+ionic start --list
 ionic start myApp tabs --type=angular
 ionic serve --lab
 

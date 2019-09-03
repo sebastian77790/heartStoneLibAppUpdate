@@ -27,6 +27,7 @@ export class CardListingPage {
 
   favoriteCards: any = {};
   favoriteCardSub: Subscription;
+  limit: number = 20;
 
   constructor(
     private router: ActivatedRoute,
@@ -123,6 +124,14 @@ export class CardListingPage {
   favoriteCard(card: Card){
     this.favoriteCardStore.toggleCard(card);
   }
+
+  loadData(infiniteScroll){
+    setTimeout(() => {
+      this.limit += 20;
+      infiniteScroll.target.complete();
+    }, 200)
+  }
+
 
   /*favoriteCard(card: Card){
     if(card.favorite){

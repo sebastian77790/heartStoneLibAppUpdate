@@ -19,7 +19,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list *ngIf="cards.length > 0">
-    <ion-card *ngFor="let card of cards">
+    <ion-card *ngFor="let card of cards | slice:0:limit">
       <ion-card-header text-wrap>
         <ion-card-subtitle>{{ card.cardSet }} <ion-icon (click)="favoriteCard(card)" [ngClass]="card.favorite ? 'favorite' : 'normal' " name="flame" class="like-icon"></ion-icon> </ion-card-subtitle>
         <ion-card-title>{{ card.name }}</ion-card-title>
@@ -30,4 +30,11 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

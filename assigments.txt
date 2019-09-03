@@ -48,6 +48,8 @@ git remote add origin url.git
 git push -u origin master
 git push -f origin
 
+git reset --hard HEAD~10
+
 First find the terminal in Visual Studio Code
 
 Create your new repository on GitHub. Do not adde README, license or gitignore for now. Note the “remote repository URL”, which you will need in step 7 instead of **URL**.
@@ -65,14 +67,32 @@ ionic cordova emulate android --livereload
 
 npm install
 ionic cordova prepare
+ionic cordova prepare android
 ionic cordova platform add android
 ionic cordova build android
 ionic cordova run android --device
 ionic cordova run android --list
+
+ionic cordova resources
+
 clear/cls
 ionic generate page contact
 ionic generate component contact/form
 ionic g page nombre --spec=false
+
+
+ionic info
+ionic lib
+
+Uninstall node
+Delete folder Angular folder from Appdata>>Roaming>>...
+
+  restart
+  npm i
+  npm -g update npm
+  npm uninstall -g @angular/cli angular/cli
+  npm cache clean
+  npm install -g @angular/cli
 
 $ git config --global user.name "John Doe"
 $ git config --global user.email johndoe@example.com
